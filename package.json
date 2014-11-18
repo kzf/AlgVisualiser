@@ -1,0 +1,30 @@
+{
+  "name": "web-app-grunt-starter",
+  "version": "0.0.0-ignored",
+  "description": "App Description",
+  "homepage": "https://kzf.github.io",
+  "author": {
+    "name": "Kevin Fray",
+    "url": "http://kzf.github.io"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt qunit"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.0rc2",
+    "grunt-bower-concat": "^0.4.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-qunit": "~0.1.0",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "~0.1.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-browserify": "^3.2.0"
+  },
+  "dependencies": {
+    
+  }
+}

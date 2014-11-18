@@ -1,0 +1,24 @@
+{
+  "name": "grunt-bower-template",
+  "version": "0.0.0",
+  "authors": [
+    "kzf <kzfray@gmail.com>"
+  ],
+  "description": "Grunt and Bower template",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "raphael": "~2.1.2"
+  },
+  "devDependencies": {
+    "qunit": "~1.15.0"
+  }
+}
