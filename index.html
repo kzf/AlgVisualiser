@@ -3,19 +3,29 @@
 	<head>
 		<title>Algorithm Visualiser</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href='http://fonts.googleapis.com/css?family=Bowlby+One+SC' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="compiled/style/style.css">
+		<script src="lib/_bower.min.js"></script>
 	</head>
 	<body>
-		<div class="header">
-			<button class="back-button">Back</button>
+		<header>
+			<button class="ui-button">Back</button>
 			<h1>Hare and Tortoise Algorithm</h1>
-		</div>
-		<div id="view1">
-			
-		</div>
-		<div id="view2">
-			
-		</div>
+		</header>
+		<article class="views">
+			<section class="left-view" id="left-view">
+				Put view here
+			</section><section class="right-view" id="right-view">
+			</section>
+		</article>
+		<footer>
+			<button id="step_back" class="ui-button">Last</button>
+			<div class="steps-counter">
+				<span class="current-steps">1</span>/
+				<span class="total-steps">36</span>
+			</div>
+			<button id="step_forward" class="ui-button">Next</button>
+		</footer>
 		<script src="compiled/js/app.js"></script>
 	</body>
 </html>

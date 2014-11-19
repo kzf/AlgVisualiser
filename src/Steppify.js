@@ -22,6 +22,7 @@ var SteppifyAlgorithm = function(Algorithm, params) {
 	}
 
 	this.alg.generate();
+	this.numKeyframes = this.alg.numKeyframes;
 };
 
 module.exports = SteppifyAlgorithm;

@@ -8,16 +8,19 @@ var HareTortoise = function(params) {
 	this.cycleLength = -1; // length of cycle
 
 	this.steps = [];
+	this.numKeyframes = 0;
 };
 
 HareTortoise.prototype.generate = function() {
+	this.keyframe();
 	this.initialisePointers();
-	console.log(this.comparePointers());
+	this.keyframe();
 	while (this.comparePointers()) {
 		this.tortoiseStep();
 		this.hareStep();
-		console.log(this.tortoise.value);
+		this.keyframe();
 	}
+	this.keyframe();
 };
 
 HareTortoise.prototype.initialisePointers = function() {
@@ -38,9 +41,12 @@ HareTortoise.prototype.hareStep = function() {
 };
 
 HareTortoise.prototype.tortoiseStep = function() {
-	console.log(this, this.tortoise);
 	this.tortoise = this.tortoise.next;
 	this.steps.push({name: 'tortoiseStep'});
+};
+
+HareTortoise.prototype.keyframe = function() {
+	this.numKeyframes++;
 };
 
 module.exports = HareTortoise;

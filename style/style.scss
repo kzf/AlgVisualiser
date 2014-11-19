@@ -1,10 +1,86 @@
-$header-color: orange;
+$accent: #D35400;
+$soft-accent: #F27935;
+
+* { box-sizing: border-box; }
+
+/* FONTS
+ ===================== */
+
+header, h1 {
+	font-family: 'Bowlby One SC', cursive;
+	font-weight: 400;
+}
+
+/* LAYOUT
+ ===================== */
+
+
+body, h1 {
+	margin: 0;
+	padding: 0;
+}
+
+header, footer {
+	background-color: $accent;
+	color: #fff;
+	height: 70px;
+	line-height: 70px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 70px;
+	line-height: 70px;
+}
+
+.views {
+	position: absolute;
+	top: 70px;
+	bottom: 70px;
+	width: 100%;
+}
+
+.left-view {
+	display: inline-block;
+	width: 70%;
+	vertical-align: top;
+	overflow: auto;
+	border-right: 2px solid $soft-accent;
+	height: 100%;
+}
+
+.right-view {
+	vertical-align: top;
+	display: inline-block;
+	width: 30%;
+	height: 100%;
+}
 
 .step {
 	margin: 0;
 }
 
-.back-button {
+.ui-button {
 	float: left;
-	width: 150px;
+	font-family: 'Bowlby One SC', cursive;
+	color: white;
+	font-weight: bold;
+	width: 60px;
+	margin-right: 20px;
+	display: block;
+	height: 40px;
+	margin-top: 15px;
+	margin-left: 20px;
+	background-color: $soft-accent;
+	border: none;
+}
+.ui-button:hover {
+	background-color: $accent;
+	color: $soft-accent;
+}
+
+.steps-counter {
+	float: left;
 }

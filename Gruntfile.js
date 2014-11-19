@@ -80,7 +80,15 @@ module.exports = function(grunt) {
       },
       src: {
         files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
+        tasks: ['jshint:src']
+      },
+      css: {
+        files: ['style/*'],
+        tasks: ['sass']
+      },
+      js: {
+        files: ['src/*.js'],
+        tasks: ['jshint:src', 'browserify']
       }
     },
     bower_concat: {

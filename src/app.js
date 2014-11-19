@@ -26,7 +26,19 @@ var textView = new TextView(document.getElementById("view2"), alg);
 textView.show();*/
 
 var a = new Steppify(HareTortoise, {linkedlist: cycle});
-console.log(a.steps);
 
-var textView = new TextView(document.getElementById("view2"), a);
-textView.show();
+var textView = new TextView(document.getElementById("right-view"), a);
+
+var currentSteps = $(".current-steps").text(0);
+console.log("igua");
+$(".total-steps").text(a.numKeyframes);
+
+$("#step_back").on("click", function() {
+	textView.last();
+	currentSteps.text(parseInt(currentSteps.text()) - 1);
+});
+$("#step_forward").on("click", function() {
+	textView.next();
+	currentSteps.text(parseInt(currentSteps.text()) + 1);
+	console.log("back");
+});
