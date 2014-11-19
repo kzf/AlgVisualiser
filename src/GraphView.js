@@ -29,6 +29,7 @@ TextView.prototype.undoStep = function(i) {
 
 TextView.prototype.next = function() {
 	var frame = this.keyframes.next(), self = this;
+	console.log(frame);
 	frame.steps.forEach(function(step) {
 		if (frame.add) {
 			self.addStep(step.id, step.step);

@@ -1,6 +1,7 @@
 var LinkedList = require('./LinkedList'),
 		Steppify = require('./Steppify'),
 		TextView = require('./TextView'),
+		GraphView = require('./GraphView'),
 		HareTortoise = require('./HareTortoise');
 
 var linkedlistWithCycle = function(a, b) {
@@ -26,19 +27,25 @@ var textView = new TextView(document.getElementById("view2"), alg);
 textView.show();*/
 
 var a = new Steppify(HareTortoise, {linkedlist: cycle});
+console.log(a);
 
 var textView = new TextView(document.getElementById("right-view"), a);
 
 var currentSteps = $(".current-steps").text(0);
 console.log("igua");
-$(".total-steps").text(a.numKeyframes);
+$(".total-steps").text(a.numKeyframes - 1);
 
 $("#step_back").on("click", function() {
-	textView.last();
-	currentSteps.text(parseInt(currentSteps.text()) - 1);
+	var currentStep = parseInt(currentSteps.text());
+	if (currentStep !== 0) {
+		textView.last();
+		currentSteps.text(currentStep - 1);
+	}
 });
 $("#step_forward").on("click", function() {
-	textView.next();
-	currentSteps.text(parseInt(currentSteps.text()) + 1);
-	console.log("back");
+	var currentStep = parseInt(currentSteps.text());
+	if (currentStep !== a.numKeyframes - 1) {
+		textView.next();
+		currentSteps.text(parseInt(currentSteps.text()) + 1);
+	}
 });
