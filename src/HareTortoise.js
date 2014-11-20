@@ -1,7 +1,6 @@
 'use strict';
 
 var HareTortoise = function(params) {
-	console.log(params);
 	this.head = params.linkedlist;
 
 	this.straightLength = -1; // distance to first cycle

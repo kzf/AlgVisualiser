@@ -46,7 +46,6 @@ GraphView.prototype.addStep = function(i, step) {
 		tortoise = next(tortoise);
 	}
 	this.pointers[i] = {hare: hare, tortoise: tortoise};
-	console.log(this.pointers);
 	return step;
 };
 
@@ -136,7 +135,6 @@ GraphView.prototype.showGraph = function() {
 	    var width = container.clientWidth;
 	    var height = container.clientHeight;
 	    svg.attr("width", width).attr("height", height);
-	    console.log(width/(self.steppedAlgorithm.alg.cycleLength/2 +self.steppedAlgorithm.alg.straightLength));
 	    force.size([width, height])
 	    		 .linkDistance(width/(self.steppedAlgorithm.alg.cycleLength/2 +self.steppedAlgorithm.alg.straightLength))
 	    		 .start();
@@ -186,6 +184,7 @@ GraphView.prototype.showGraph = function() {
 	var freeze = $("<button></button>")
 						.text("freeze")
 						.addClass("view-floating-button")
+						.addClass("ui-button-slide")
 						.click(function() {
 							force.stop();
 						});

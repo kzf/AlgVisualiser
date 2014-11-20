@@ -6,7 +6,7 @@ $soft-accent: #F27935;
 /* FONTS
  ===================== */
 
-body, h1 {
+body, h1, button {
 	font-family: 'Open Sans', sans-serif;
 }
 h1 {
@@ -17,9 +17,19 @@ h1 {
  ===================== */
 
 
-body, h1 {
+body, html {
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+	margin-left: 180px;
 }
 
 header, footer {
@@ -36,6 +46,41 @@ footer {
 	height: 70px;
 	line-height: 70px;
 }
+
+button:hover {
+	cursor: pointer;
+}
+
+.algorithm-list {
+	position: absolute;
+	top: 70px;
+	bottom: 0px;
+	overflow: scroll;
+	width: 100%;
+}
+	.algorithm-list ul {
+		list-style-type: none;
+		padding: 0;
+		width: 80%;
+		margin: 0 auto;
+	}
+	.algorithm-list li {
+		display: block;
+		width: 100%;
+		background: $soft-accent;
+		font-weight: bold;
+		padding: 10px 30px;
+		margin-top: 20px;
+		border-left: 20px solid $accent;
+		transition: background .3s ease;
+		box-shadow: 0px 2px 0px 0px $accent;
+	}
+	.algorithm-list li:hover {
+		cursor: pointer;
+		background: $accent;
+		color: white;
+	}
+
 
 .views {
 	position: absolute;
@@ -86,11 +131,10 @@ path.link {
 }
 
 .ui-button {
+	position: relative;
 	float: left;
-	font-family: 'Bowlby One SC', cursive;
 	color: white;
 	font-weight: bold;
-	width: 60px;
 	margin-right: 20px;
 	display: block;
 	height: 40px;
@@ -99,22 +143,21 @@ path.link {
 	background-color: $soft-accent;
 	border: none;
 }
-.ui-button:hover {
-	background-color: $accent;
-	color: $soft-accent;
-}
 
 .steps-counter {
 	float: left;
 }
 
 .node {
-	transition: all 0.5s ease-in;
+	fill: white;
+	stroke: black;
+	stroke-width: 2px;
+	transition: all 0.2s ease-in;
 }
 
 .hare {
-	stroke: red;
-	stroke-width: 3px;
+	stroke: $accent;
+	stroke-width: 7px;
 }
 
 .tortoise {
@@ -131,4 +174,119 @@ svg {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.ui-fullbar-button {
+	background: linear-gradient(to bottom, $soft-accent, $accent 40%);
+	float: right;
+	width: 30%;
+	padding-left: 50px;
+}
+	.ui-fullbar-button:hover {
+		background: linear-gradient(to bottom, $soft-accent, $accent 100%);
+		cursor: pointer;
+	}
+
+.example-loader {
+	position: absolute;
+	background: lighten($soft-accent, 30%);
+	right: 0;
+	bottom: 70px;
+	padding: 5px;
+	max-width: 30%;
+	border-top: 15px solid $soft-accent;
+	transition: right 1s ease;
+}
+	.example-loader.hidden {
+		right: -30%;
+	}
+
+.example-row {
+	margin-bottom: 5px;
+	text-align: center;
+}
+.example-label {
+	font-size: 0.8em;
+	margin-top: 5px;
+	float: left;
+	display: block;
+	width: 150px;
+	text-align: right;
+	line-height: 20px;
+}
+.example-input {
+	display: block;
+	margin-left: 160px;
+	line-height: 20px;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	border: 1px solid #ccc;
+	padding: 4px 6px;
+	border-radius: 4px;
+}
+
+.view-floating-button {
+	width: 150px;
+	background: $accent;
+	color: white;
+	font-weight: bold;
+}
+
+.ui-button-slide {
+	position: relative;
+	border: none;
+	z-index: 1;
+	overflow: hidden;
+	padding: 5px;
+}
+	.ui-button-slide:after {
+		position: absolute;
+	  top: 80%; left: 0;
+	  width: 500%; height: 1000%;
+	  background: darken($accent, 10%);
+	  content: "";
+	  z-index: -1;
+	  transform-origin: 0% 0%;
+	  transform: translateY(10%) translateX(16%) rotate(-45deg);
+	  transition: transform .3s;
+	}
+	.ui-button-slide:hover::after {
+		transform: translateY(10%) translateX(-3%) rotate(-45deg);
+	}
+
+.ui-submit {
+	width: 80%;
+	background: $accent;
+	color: white;
+	font-weight: bold;
+}
+
+.left-angled {
+	width: 80px;
+	padding-left: 20px;
+}
+.left-angled::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 0px;
+	width: 0px;
+	border-right: 20px transparent solid;
+	border-top: 20px $accent solid;
+	border-bottom: 20px $accent solid;
+}
+.right-angled {
+	width: 80px;
+	padding-right: 20px;
+}
+.right-angled::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 0px;
+	width: 0px;
+	border-left: 20px transparent solid;
+	border-top: 20px $accent solid;
+	border-bottom: 20px $accent solid;
 }

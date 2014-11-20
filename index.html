@@ -12,22 +12,53 @@
 	</head>
 	<body>
 		<header>
-			<button class="ui-button">Back</button>
-			<h1>Hare and Tortoise Algorithm</h1>
+			<button id="back" class="ui-button left-angled ui-button-slide">Back</button>
+			<h1 class="ui-title">Hare and Tortoise Algorithm</h1>
 		</header>
+		<article class="algorithm-list">
+			<ul>
+				<li class="algorithm">
+					Hare and Tortoise Algorithm
+				</li>
+				<li class="algorithm">
+					Breadth First Search
+				</li>
+				<li class="algorithm">
+					Depth First Search
+				</li>
+			</ul>
+		</article>
 		<article class="views">
 			<section class="left-view" id="left-view">
 			</section><section class="right-view" id="right-view">
 			</section>
 		</article>
 		<footer>
-			<button id="step_back" class="ui-button">Last</button>
+			<button id="step_back" class="ui-button ui-button-slide left-angled">Last</button>
 			<div class="steps-counter">
 				<span class="current-steps">1</span>/
 				<span class="total-steps">36</span>
 			</div>
-			<button id="step_forward" class="ui-button">Next</button>
+			<button id="step_forward" class="ui-button ui-button-slide right-angled">Next</button>
+			<div id="example-toggle" class="ui-fullbar-button">
+				Choose Inputs...
+			</div>
 		</footer>
+		<aside class="example-loader">
+			<div class="example-form">
+				<div class="example-row">
+					<label class="example-label" for="straightLength">Straight part length:</label>
+					<input class="example-input" type="text" placeholder="7" name="straightLength" size="4">
+				</div>
+				<div class="example-row">
+					<label class="example-label" for="cycleLength">Cycle length:</label>
+					<input class="example-input" type="text" placeholder="5" name="cycleLength" size="4">
+				</div>
+			</div>
+			<div class="example-row">
+				<button class="ui-submit ui-button-slide">Run this input</button>
+			</div>
+		</aside>
 		<script src="compiled/js/app.js"></script>
 	</body>
 </html>
