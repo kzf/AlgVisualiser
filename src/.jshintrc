@@ -13,6 +13,7 @@
   "browserify": true,
   "predef": 
     [ "jQuery",
+      "d3",
       "$",
       "console",
       "module",

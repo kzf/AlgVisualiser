@@ -16,7 +16,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "raphael": "~2.1.2"
+    "raphael": "~2.1.2",
+    "d3": "~3.4.13"
   },
   "devDependencies": {
     "qunit": "~1.15.0"

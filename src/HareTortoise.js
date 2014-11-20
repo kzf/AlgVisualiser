@@ -27,8 +27,8 @@ var HareTortoise = function(params) {
 			level: 1
 		},
 		initCycleCount: {
-			desc: "Start counting the length of the cycle",
-			level: 0
+			desc: "Start counting the length of the cycle and move the tortoise one step forward",
+			level: 1
 		},
 		cycleLengthIncrement: {
 			desc: "Add one to the length of the cycle",
@@ -56,6 +56,7 @@ HareTortoise.prototype.generate = function() {
 	}
 	this.keyframe();
 	this.initCycleCount();
+	this.keyframe();
 	while (this.comparePointers()) {
 		this.tortoiseStep();
 		this.cycleLengthIncrement();
@@ -63,6 +64,7 @@ HareTortoise.prototype.generate = function() {
 	}
 	this.keyframe();
 	this.initCycleFind();
+	this.keyframe();
 	while (this.comparePointers()) {
 		this.bothOneStep();
 		this.keyframe();
