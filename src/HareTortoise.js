@@ -1,6 +1,7 @@
 'use strict';
 
-var LinkedList = require('./LinkedList');
+var LinkedList = require('./LinkedList'),
+		drawDirectedGraph = require('./drawDirectedGraph');
 
 /*==================
 	Hare and Tortoise Algorithm for finding cycles in
@@ -260,99 +261,13 @@ GraphView.prototype.showGraph = function() {
 	links.push({source: nodes[j+i-1], target: nodes[i-1], value: 1});
 	nodes[j+i-1].next = i-1;
 
-	var container = this.container[0];
-
-	/* Function to draw the arcs and update the node positions */
-	function tick() {
-		path.attr("d", function(d) {
-        var dx = d.target.x - d.source.x,
-            dy = d.target.y - d.source.y,
-            dr = Math.sqrt(dx * dx + dy * dy);
-        return "M" + 
-            d.source.x + "," + 
-            d.source.y + "A" + 
-            dr + "," + dr + " 0 0,1 " + 
-            d.target.x + "," + 
-            d.target.y;
-    });
-
-    node.attr("transform", function(d) { 
-		    return "translate(" + d.x + "," + d.y + ")";
-		});
-	}
-
-	/* Graph layout */
-	var force = d3.layout.force()
-	    .nodes(d3.values(nodes))
-	    .links(links)
-	    .size([1000,1000])
-	    .linkDistance(400)
-	    .charge(-500)
-	    .on("tick", tick)
-	    .start();
-
-	var svg = d3.select(container).append("svg");
-
-	/* Dynamically adjust the size to fit the container */
-	var self=  this;
-	var resize = function() {
-	    var width = container.clientWidth;
-	    var height = container.clientHeight;
-	    svg.attr("width", width).attr("height", height);
-	    force.size([width, height])
-	    		 .linkDistance(width/(self.steppedAlgorithm.alg.cycleLength/2 +self.steppedAlgorithm.alg.straightLength))
-	    		 .start();
-	};
-	window.addEventListener('resize', resize); 
-	setTimeout(resize, 300);
-	
-
-	/* Define the arrow */
-	svg.append("svg:defs").selectAll("marker")
-	    .data(["end"])      // Different link/path types can be defined here
-	  .enter().append("svg:marker")    // This section adds in the arrows
-	    .attr("id", String)
-	    .attr("viewBox", "0 -5 10 10")
-	    .attr("refX", 20)
-	    .attr("refY", -1.5)
-	    .attr("markerWidth", 6)
-	    .attr("markerHeight", 6)
-	    .attr("orient", "auto")
-	  .append("svg:path")
-	    .attr("d", "M0,-5L10,0L0,5");
-
-	/* Inser the svg for the paths */
-	var path = svg.append("svg:g").selectAll("path")
-	    .data(force.links())
-	  .enter().append("svg:path")
-	    .attr("class", function(d) { return "link " + d.type; })
-	    .attr("marker-end", "url(#end)");
-
-	/* Insert the svg for the nodes */
-	var node = svg.selectAll(".node")
-	    .data(force.nodes())
-	  .enter().append("g")
-	    .attr("class", "node")
-	    .call(force.drag);
-
-	/* Draw the nodes in each <g> */
-	node.append("circle")
-	    .attr("r", 10);
-
-	node[0].forEach(function(n) {
-		self.nodes.push(d3.select(n));
+	var nodesWide = this.steppedAlgorithm.alg.straightLength+this.steppedAlgorithm.alg.cycleLength/2;
+	var graph = drawDirectedGraph(this.container[0], nodes, links, function(w) {
+		return w/nodesWide;
 	});
 
-	this.allNodes = node;
-
-	var freeze = $("<button></button>")
-						.text("freeze")
-						.addClass("view-floating-button")
-						.addClass("ui-button-slide")
-						.click(function() {
-							force.stop();
-						});
-	this.container.append(freeze);
+	this.allNodes = graph.allNodes;
+	this.nodes = graph.nodes;
 
 };
 
