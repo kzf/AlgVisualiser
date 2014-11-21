@@ -1,0 +1,17 @@
+$accent: #D35400;
+
+.step {
+	margin: 0;
+	padding: 0px 5px;
+}
+.step-0 {
+	background: #C8F7C5;
+}
+.step-1 {
+	background: #86E2D5;
+	padding-left: 20px;
+}
+.step-null {
+	height: 2px;
+	background: $accent;
+}

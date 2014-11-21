@@ -89,6 +89,11 @@ function drawDirectedGraph(container, nodes, links, widthF) {
 	node.append("circle")
 	    .attr("r", 10);
 
+	node.append("text")
+    .attr("x", -4)
+    .attr("dy", ".25em")
+    .text(function(d) { return d.name; });
+
 	var freeze = $("<button></button>")
 						.text("freeze")
 						.addClass("view-floating-button")

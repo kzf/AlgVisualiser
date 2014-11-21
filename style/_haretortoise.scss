@@ -1,0 +1,32 @@
+path.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+.node {
+	fill: white;
+	stroke: black;
+	stroke-width: 2px;
+	transition: all 0.2s ease-in;
+}
+
+.hare {
+	stroke: #F9690E;
+	stroke-width: 7px;
+}
+
+.tortoise {
+	fill: #87D37C;
+}
+
+.visited {
+	fill: #cccccc;
+}
+
+g text {
+	font-weight: 200;
+	font-family: Helvetica, sans-serif;
+	font-size: 80%;
+	stroke-width: 1px;
+}

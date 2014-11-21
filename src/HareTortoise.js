@@ -1,7 +1,8 @@
 'use strict';
 
 var LinkedList = require('./LinkedList'),
-		drawDirectedGraph = require('./drawDirectedGraph');
+		drawDirectedGraph = require('./drawDirectedGraph'),
+		KeyframeHandler = require("./KeyframeHandler");
 
 /*==================
 	Hare and Tortoise Algorithm for finding cycles in
@@ -165,8 +166,6 @@ ExampleFactory.prototype.build = function(straightLength, cycleLength) {
 /*=====================
 	Graph View of the Hare Tortoise Algorithm
 	=====================*/
-var KeyframeHandler = require("./KeyframeHandler");
-
 var GraphView = function(container, steppedAlgorithm) {
 	this.container = $(container);
 	this.steppedAlgorithm = steppedAlgorithm;

@@ -1,6 +1,7 @@
 var Steppify = require('./Steppify'),
 		TextView = require('./TextView'),
-		HareTortoise = require('./HareTortoise');
+		HareTortoise = require('./HareTortoise'),
+		DepthFirstSearch = require('./DepthFirstSearch');
 
 /*********************/
 
@@ -24,9 +25,9 @@ var algorithms = [
 		rightView: TextView
 	}, {
 		desc: "Depth First Search",
-		alg: HareTortoise.Alg,
-		examples: HareTortoise.Examples,
-		leftView: HareTortoise.GraphView,
+		alg: DepthFirstSearch.Alg,
+		examples: DepthFirstSearch.Examples,
+		leftView: DepthFirstSearch.GraphView,
 		rightView: TextView
 	}
 ];
@@ -121,7 +122,7 @@ App.prototype.loadAlgorithm = function(i) {
 
 	// Step counts
 	this.currentSteps.text(0);
-	this.totalSteps.text(this.algorithm.alg.numKeyframes);
+	this.totalSteps.text(this.algorithm.alg.numKeyframes-1);
 
 	// Header
 	this.algorithm_header.text(algorithms[i].desc);

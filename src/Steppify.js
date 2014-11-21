@@ -13,6 +13,7 @@ var SteppifyAlgorithm = function(Algorithm, params) {
 			self.steps.push({
 				name: f, 
 				arguments: arguments, 
+				returnval: r,
 				desc: description.desc, 
 				level: description.level
 			});
