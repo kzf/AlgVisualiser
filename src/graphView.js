@@ -17,6 +17,9 @@ var graphView = function(params) {
 	};
 
 	_GraphView.prototype.addStep = function(i, step) {
+		if (params.customAddon) {
+			this.customAddon.addStep(i, step);
+		}
 		var self = this;
 		var logNodeClass = function(i, id, c) {
 			if (typeof c === 'string') {
@@ -54,6 +57,9 @@ var graphView = function(params) {
 	};
 
 	_GraphView.prototype.doStep = function(i) {
+		if (params.customAddon) {
+			this.customAddon.doStep(i);
+		}
 		var c, k;
 		for (c in this.nodeLists) {
 			if (this.nodeLists.hasOwnProperty(c)) {
@@ -98,6 +104,9 @@ var graphView = function(params) {
 	};
 
 	_GraphView.prototype.undoStep = function(i) {
+		if (params.customAddon) {
+			this.customAddon.undoStep(i);
+		}
 		var j, c;
 		for (c in this.nodeLists) {
 			if (this.nodeLists.hasOwnProperty(c)) {
@@ -200,6 +209,11 @@ var graphView = function(params) {
 			alContainer.append(adj);
 			$(this.container).append(alContainer);
 		}
+
+		if (params.customAddon) {
+			this.customAddon = new params.customAddon(this.container);
+		}
+
 	};
 
 	return _GraphView;

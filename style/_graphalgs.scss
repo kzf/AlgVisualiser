@@ -42,6 +42,12 @@ path.visitingLink {
 	top: 20px;
 }
 
+.bottom-right-container {
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
 .adjacency-list {
 	padding: 0;
 	border-collapse: collapse;
@@ -68,4 +74,14 @@ td.visitedNode {
 td.visitingNode {
 	background-color: #BE90D4;
 	color: black;
+}
+
+.stack::before {
+	content: "Stack: ";
+	font-size: 1.2em;
+}
+
+.stack-element {
+	padding: 10px;
+	background-color: #BE90D4;
 }
