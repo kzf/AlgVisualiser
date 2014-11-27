@@ -1,7 +1,8 @@
 var Steppify = require('./Steppify'),
 		TextView = require('./TextView'),
 		HareTortoise = require('./HareTortoise'),
-		DepthFirstSearch = require('./DepthFirstSearch');
+		DepthFirstSearch = require('./DepthFirstSearch'),
+		BreadthFirstSearch = require('./BreadthFirstSearch');
 
 /*********************/
 
@@ -19,9 +20,9 @@ var algorithms = [
 		rightView: TextView
 	}, {
 		desc: "Breadth First Search",
-		alg: HareTortoise.Alg,
-		examples: HareTortoise.Examples,
-		leftView: HareTortoise.GraphView,
+		alg: BreadthFirstSearch.Alg,
+		examples: BreadthFirstSearch.Examples,
+		leftView: BreadthFirstSearch.GraphView,
 		rightView: TextView
 	}, {
 		desc: "Depth First Search",
@@ -60,8 +61,6 @@ AlgorithmRunner.prototype.load = function(input) {
 	}
 
 	this.alg = new Steppify(this.Alg, input);
-
-	$(".total-steps").text(this.alg.numKeyframes - 1);
 
 	this.leftView = new this.LeftView(this.left_view, this.alg);
 	this.rightView = new this.RightView(this.right_view, this.alg);
@@ -180,9 +179,12 @@ App.prototype.registerEventHandlers = function() {
 		self.algorithm.load(
 			self.algorithm.exampleFactory.build.apply(self.algorithm.exampleFactory, args)
 		);
+		self.currentSteps.text(0);
+		self.totalSteps.text(self.algorithm.alg.numKeyframes-1);
 	});
 
 	$("#back").on("click", function() {
+		self.example_loader.addClass("hidden");
 		self.algorithm_list.fadeIn();
 		self.algorithm_display.fadeOut();
 		self.algorithm_header.text("Algorithm Visualiser");

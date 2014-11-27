@@ -59,7 +59,8 @@ td.row-label {
 
 td {
 	padding: 0px 3px;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #cccccc;
+	border-top: 1px solid #cccccc;
 }
 
 td.visitedLink {
@@ -81,7 +82,13 @@ td.visitingNode {
 	font-size: 1.2em;
 }
 
+.queue::before {
+	content: "Queue: ";
+	font-size: 1.2em;
+}
+
 .stack-element {
 	padding: 10px;
 	background-color: #BE90D4;
+	margin-right: 5px;
 }

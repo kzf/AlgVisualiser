@@ -198,7 +198,6 @@ var graphView = function(params) {
 				this.adjacencyListLabels[i] = label;
 				row = $("<tr>").append(label);
 				adj.append(row);
-				console.log(nodes[i]);
 				for (j = 0; j < nodes[i].links.length; j++) {
 					el = $("<td>").text(nodes[i].links[j].target.name);
 					this.adjacencyList[nodes[i].links[j].id] = el;
