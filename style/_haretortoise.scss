@@ -16,17 +16,32 @@ path.link {
 	stroke-width: 7px;
 }
 
+.visited {
+	stroke: #cccccc;
+}
+	.visited text {
+		stroke: #999999;
+	}
+
+
 .tortoise {
 	fill: #87D37C;
+	stroke: #000000;
 }
-
-.visited {
-	fill: #cccccc;
-}
+	.tortoise text {
+		stroke: #000000;
+	}
 
 g text {
 	font-weight: 200;
 	font-family: Helvetica, sans-serif;
 	font-size: 80%;
 	stroke-width: 1px;
+}
+
+path.visitedLink {
+	stroke: #cccccc;
+}
+path.visitingLink {
+	stroke: red;
 }

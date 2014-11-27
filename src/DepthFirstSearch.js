@@ -1,7 +1,7 @@
 'use strict';
-var drawDirectedGraph = require('./drawDirectedGraph'),
-		KeyframeHandler = require("./KeyframeHandler");
-console.log(KeyframeHandler);
+
+var graphView = require('./graphView');
+
 /*==============
 	Depth First Search
 	==============*/
@@ -31,6 +31,10 @@ var DepthFirstSearch = function(params) {
 		visitNode: {
 			desc: "Marking node as visited and adding neighbours to the stack",
 			level: 0
+		},
+		checkLink: {
+			desc: "Checking link",
+			level: 2
 		}
 	};
 };
@@ -42,7 +46,6 @@ DepthFirstSearch.prototype.generate = function() {
 	this.keyframe();
 	while ( (node = this.getNextNode()) !== -1) {
 		this.keyframe();
-		console.log("visiting node " + node);
 		this.visitNode(node);
 		this.keyframe();
 	}
@@ -84,10 +87,16 @@ DepthFirstSearch.prototype.visitNode = function(i) {
 	this.visited[i] = true;
 	var self = this;
 	this.nodes[i].links.forEach(function (l) {
-		if (!self.visited[l.target.name]) {
-			self.stack.push(l.target.name);
-		}
+		self.checkLink(l.id);
 	});
+};
+
+DepthFirstSearch.prototype.checkLink = function(id) {
+	var l = this.links[id];
+	if (!this.visited[l.target.name]) {
+		this.stack.push(l.target.name);
+	}
+	this.keyframe();
 };
 
 DepthFirstSearch.prototype.keyframe = function() {
@@ -121,11 +130,10 @@ Examples.prototype.build = function(n) {
 		while (t === s) {
 			t = Math.floor(Math.random()*n);
 		}
-		link = {source: nodes[s], target: nodes[t]};
+		link = {id: i, source: nodes[s], target: nodes[t]};
 		links.push(link);
 		nodes[s].links.push(link);
 	}
-	console.log(links, nodes);
 
 	return {nodes: nodes, links: links};
 };
@@ -133,74 +141,24 @@ Examples.prototype.build = function(n) {
 /*================
 	Graph View
 	================*/
-var GraphView = function(container, steppedAlgorithm) {
-	this.container = container;
-	this.steppedAlgorithm = steppedAlgorithm;
-	this.keyframes = new KeyframeHandler(this.steppedAlgorithm.steps);
-
-	this.currentNodes = [];
-	this.visitedNodes = [];
-	this.currentNode = null;
-
-	this.showGraph();
-};
-
-GraphView.prototype.addStep = function(i, step) {
-	if (step.name === 'visitNode') {
-		this.currentNodes[i] = step.arguments[0];
-		this.currentNode = step.arguments[0];
-		this.visitedNodes[i+2] = this.currentNode;
+var DFSGraphView = graphView({
+	config: {
+		'tortoise': true,
+		'visited': false,
+		'visitingLink': true,
+		'visitedLink': false
+	},
+	visitNode: {
+		nodeClass: ['tortoise', 'visited'],
+	},
+	checkLink: {
+		linkClass: ['visitingLink', 'visitedLink']
 	}
-};
-
-GraphView.prototype.doStep = function(i) {
-	if (typeof this.currentNodes[i] !== 'undefined') {
-		this.allNodes.classed("tortoise", false);
-		this.nodes[this.currentNodes[i]].classed("tortoise", true);
-	}
-	if (typeof this.visitedNodes[i] !== 'undefined') {
-		this.nodes[this.visitedNodes[i]].classed("visited", true);
-	}
-};
-
-GraphView.prototype.undoStep = function(i) {
-	this.allNodes.classed("tortoise", false);
-	if (this.currentNodes[i-1]) {
-		this.nodes[this.currentNodes[i-1]].classed("tortoise", true);
-	}
-};
-
-GraphView.prototype.next = function() {
-	var frame = this.keyframes.next(), self = this;
-	frame.steps.forEach(function(step) {
-		if (frame.add) {
-			self.addStep(step.id, step.step);
-		}
-		self.doStep(step.id);
-	});
-};
-
-GraphView.prototype.last = function() {
-	var frame = this.keyframes.last(), self = this;
-	frame.steps.forEach(function(step) {
-		self.undoStep(step.id);
-	});
-};
-
-GraphView.prototype.showGraph = function() {
-	var graph = drawDirectedGraph(
-		this.container, 
-		this.steppedAlgorithm.alg.nodes, 
-		this.steppedAlgorithm.alg.links
-	);
-
-	this.allNodes = graph.allNodes;
-	this.nodes = graph.nodes;
-};
+});
 
 /*=========
 	Exports
 	=========*/
 exports.Alg = DepthFirstSearch;
 exports.Examples = Examples;
-exports.GraphView = GraphView;
+exports.GraphView = DFSGraphView;

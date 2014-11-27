@@ -90,8 +90,8 @@ function drawDirectedGraph(container, nodes, links, widthF) {
 	    .attr("r", 10);
 
 	node.append("text")
-    .attr("x", -4)
-    .attr("dy", ".25em")
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "middle")
     .text(function(d) { return d.name; });
 
 	var freeze = $("<button></button>")
