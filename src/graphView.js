@@ -48,7 +48,6 @@ var graphView = function(params) {
 				logLinkClass(i, step.arguments[0], params[step.name].linkClass);
 			}
 			if (params[step.name].clearLinkClass) {
-				console.log("step!");
 				logLinkClass(i, -1, params[step.name].clearLinkClass);
 			}
 		}

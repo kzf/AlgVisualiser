@@ -18,35 +18,51 @@ var HareTortoise = function(params) {
 
 	this.stepDescriptions = {
 		initialisePointers: {
-			desc: "Initalise both pointers to the start of the list",
+			desc: function() {
+				return "Initalise both pointers to the start of the list";
+			},
 			level: 0
 		},
 		comparePointers: {
-			desc: "Check whether the pointers are equal",
+			desc: function() {
+				return "Check whether the pointers are equal";
+			},
 			level: 0
 		},
 		hareStep: {
-			desc: "Move the hare pointer two steps forward",
+			desc: function() {
+				return "Move the hare pointer two steps forward";
+			},
 			level: 1
 		},
 		tortoiseStep: {
-			desc: "Move the tortoise pointer just one step forward",
+			desc: function() {
+				return "Move the tortoise pointer just one step forward";
+			},
 			level: 1
 		},
 		initCycleCount: {
-			desc: "Start counting the length of the cycle and move the tortoise one step forward",
+			desc: function() {
+				return "Start counting the length of the cycle and move the tortoise one step forward";
+			},
 			level: 1
 		},
 		cycleLengthIncrement: {
-			desc: "Add one to the length of the cycle",
+			desc: function() {
+				return "Add one to the length of the cycle";
+			},
 			level: 1
 		},
 		initCycleFind: {
-			desc: "Move the tortoise the length of the cycle ahead",
+			desc: function() {
+				return "Move the tortoise the length of the cycle ahead";
+			},
 			level: 0
 		},
 		bothOneStep: {
-			desc: "Move both pointers one step forward",
+			desc: function() {
+				return "Move both pointers one step forward";
+			},
 			level: 1
 		}
 	};

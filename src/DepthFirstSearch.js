@@ -17,23 +17,43 @@ var DepthFirstSearch = function(params) {
 	this.numKeyframes = 0;
 	this.stepDescriptions = {
 		initialise: {
-			desc: "Mark all nodes as unvisited",
+			desc: function() {
+				return "Mark all nodes as unvisited";
+			},
 			level: 0
 		},
 		getNextNode: {
-			desc: "Looking for next node on the stack",
+			desc: function() {
+				if (this.returnval === -1) {
+					return "";
+				} else {
+					return "Got the next node: " + this.returnval;
+				}
+			},
 			level: 1
 		},
 		findUnvisitedNode: {
-			desc: "No nodes on the stack so looking for an unvisited node",
+			desc: function() {
+				if (this.returnval === -1) {
+					return "No more unvisited nodes, so we are done";
+				} else {
+					return "No nodes left on the stack so taking next unvisited node, " +
+								this.returnval;
+				}
+			},
 			level: 1
 		},
 		visitNode: {
-			desc: "Marking node as visited and adding neighbours to the stack",
+			desc: function() {
+				return "Marking node " + this.arguments[0].name + " as visited and adding neighbours to the stack";
+			},
 			level: 0
 		},
 		checkLink: {
-			desc: "Checking link",
+			desc: function() {
+				return "Checking link " + params.links[this.arguments[0]].source.name +
+						"->" + params.links[this.arguments[0]].target.name;
+			},
 			level: 2
 		}
 	};
@@ -75,9 +95,9 @@ DepthFirstSearch.prototype.getNextNode = function() {
 
 DepthFirstSearch.prototype.findUnvisitedNode = function() {
 	while (this.visited[++this.current]) {
-		if (this.current === this.nodes.length - 1) {
-			return -1;
-		}
+	}
+	if (this.current === this.nodes.length) {
+		return -1;
 	}
 	return this.current;
 };
@@ -85,7 +105,6 @@ DepthFirstSearch.prototype.findUnvisitedNode = function() {
 DepthFirstSearch.prototype.visitNode = function(i) {
 	this.visited[i] = true;
 	var self = this;
-	console.log(self);
 	this.nodes[i].links.forEach(function (l) {
 		self.checkLink(l.id);
 		self.keyframe();
@@ -112,12 +131,17 @@ var Examples = function() {
 			desc: "Number of nodes",
 			initial: 8,
 			type: Number
+		},
+		{
+			desc: "Number of edges",
+			initial: 10,
+			type: Number
 		}
 	];
-	this.initial = this.build(8);
+	this.initial = this.build(8, 10);
 };
 
-Examples.prototype.build = function(n) {
+Examples.prototype.build = function(n, E) {
 	var isConnectedTo = function(s, t) {
 		for (var i = 0; i < nodes[s].links.length; i++) {
 			if (nodes[s].links[i].target.name === t) {
@@ -134,7 +158,7 @@ Examples.prototype.build = function(n) {
 
 	// Add 20 random edges
 	var s, t, link, links = [];
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < E; i++) {
 		s = t = Math.floor(Math.random()*n);
 		while (nodes[s].links.length === n-1) {
 			s = Math.floor(Math.random()*n);

@@ -13,7 +13,7 @@ TextView.prototype.addStep = function(i) {
 	var step = $("<p></p>")
 			.addClass("step")
 			.addClass("step-" + this.steppedAlgorithm.steps[i].level)
-			.text(this.steppedAlgorithm.steps[i].desc);
+			.text(this.steppedAlgorithm.steps[i].desc && this.steppedAlgorithm.steps[i].desc() || "");
 	this.stepElements[i] = step;
 	return step;
 };
