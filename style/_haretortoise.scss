@@ -23,9 +23,22 @@ path.link {
 		stroke: #999999;
 	}
 
+marker.end1 {
+	fill: #87D37C;
+	stroke: #87D37C;
+}
+marker.end2 {
+	fill: red;
+	stroke: red;
+}
+marker.end3 {
+	fill: #cccccc;
+	stroke: #cccccc;
+}
 
 .tortoise {
 	fill: #87D37C;
+	stroke: #87D37C;
 	stroke: #000000;
 }
 	.tortoise text {
@@ -41,7 +54,9 @@ g text {
 
 path.visitedLink {
 	stroke: #cccccc;
+	marker-end: url("#end3");
 }
 path.visitingLink {
 	stroke: red;
+	marker-end: url("#end2");
 }

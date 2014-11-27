@@ -64,7 +64,6 @@ AlgorithmRunner.prototype.load = function(input) {
 	$(".total-steps").text(this.alg.numKeyframes - 1);
 
 	this.leftView = new this.LeftView(this.left_view, this.alg);
-	console.log(this.leftView);
 	this.rightView = new this.RightView(this.right_view, this.alg);
 };
 

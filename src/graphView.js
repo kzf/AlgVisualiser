@@ -5,8 +5,6 @@ var drawDirectedGraph = require('./drawDirectedGraph'),
 
 var graphView = function(params) {
 
-	console.log(params);
-
 	var _GraphView = function(container, steppedAlgorithm) {
 		this.container = container;
 		this.steppedAlgorithm = steppedAlgorithm;
@@ -44,11 +42,14 @@ var graphView = function(params) {
 		};
 		if (params[step.name]) {
 			if (params[step.name].nodeClass) {
-				logNodeClass(i, step.arguments[0], params[step.name].nodeClass);
+				logNodeClass(i, step.returnval, params[step.name].nodeClass);
 			}
 			if (params[step.name].linkClass) {
-				console.log(params[step.name].linkClass);
 				logLinkClass(i, step.arguments[0], params[step.name].linkClass);
+			}
+			if (params[step.name].clearLinkClass) {
+				console.log("step!");
+				logLinkClass(i, -1, params[step.name].clearLinkClass);
 			}
 		}
 	};
@@ -61,7 +62,9 @@ var graphView = function(params) {
 					if (params.config[c]) {
 						this.allNodes.classed(c, false);
 					}
-					this.nodes[this.nodeLists[c][i]].classed(c, true);
+					if (this.nodeLists[c][i] !== -1) {
+						this.nodes[this.nodeLists[c][i]].classed(c, true);
+					}
 				}
 			}
 		}
@@ -71,15 +74,17 @@ var graphView = function(params) {
 					if (params.config[c]) {
 						this.allLinks.classed(c, false);
 					}
-					this.links[this.linkLists[c][i]].classed(c, true);
+					if (this.linkLists[c][i] !== -1) {
+						this.links[this.linkLists[c][i]].classed(c, true);
+					}
 				}
 			}
 		}
 	};
 
 	_GraphView.prototype.undoStep = function(i) {
-		var j;
-		for (var c in this.nodeLists) {
+		var j, c;
+		for (c in this.nodeLists) {
 			if (this.nodeLists.hasOwnProperty(c)) {
 				if (typeof this.nodeLists[c][i] !== 'undefined') {
 					if (params.config[c]) {
@@ -87,11 +92,31 @@ var graphView = function(params) {
 						j = i;
 						while (--j >= 0 && typeof this.nodeLists[c][j] === 'undefined') {
 						}
-						if (j >= 0) {
+						if (j >= 0 && this.nodeLists[c][j] !== -1) {
 							this.nodes[this.nodeLists[c][j]].classed(c, true);
 						}
 					}
-					this.nodes[this.nodeLists[c][i]].classed(c, false);
+					if (this.nodeLists[c][i] !== -1) {
+						this.nodes[this.nodeLists[c][i]].classed(c, false);
+					}
+				}
+			}
+		}
+		for (c in this.linkLists) {
+			if (this.linkLists.hasOwnProperty(c)) {
+				if (typeof this.linkLists[c][i] !== 'undefined') {
+					if (params.config[c]) {
+						// Find last time this class was active
+						j = i;
+						while (--j >= 0 && typeof this.linkLists[c][j] === 'undefined') {
+						}
+						if (j >= 0 && this.linkLists[c][j] !== -1) {
+							this.links[this.linkLists[c][j]].classed(c, true);
+						}
+					}
+					if (this.linkLists[c][i] !== -1) {
+						this.links[this.linkLists[c][i]].classed(c, false);
+					}
 				}
 			}
 		}

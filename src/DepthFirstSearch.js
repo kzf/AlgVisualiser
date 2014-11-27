@@ -47,7 +47,6 @@ DepthFirstSearch.prototype.generate = function() {
 	while ( (node = this.getNextNode()) !== -1) {
 		this.keyframe();
 		this.visitNode(node);
-		this.keyframe();
 	}
 	this.keyframe();
 };
@@ -86,8 +85,10 @@ DepthFirstSearch.prototype.findUnvisitedNode = function() {
 DepthFirstSearch.prototype.visitNode = function(i) {
 	this.visited[i] = true;
 	var self = this;
+	console.log(self);
 	this.nodes[i].links.forEach(function (l) {
 		self.checkLink(l.id);
+		self.keyframe();
 	});
 };
 
@@ -96,7 +97,6 @@ DepthFirstSearch.prototype.checkLink = function(id) {
 	if (!this.visited[l.target.name]) {
 		this.stack.push(l.target.name);
 	}
-	this.keyframe();
 };
 
 DepthFirstSearch.prototype.keyframe = function() {
@@ -118,6 +118,15 @@ var Examples = function() {
 };
 
 Examples.prototype.build = function(n) {
+	var isConnectedTo = function(s, t) {
+		for (var i = 0; i < nodes[s].links.length; i++) {
+			if (nodes[s].links[i].target.name === t) {
+				return true;
+			}
+		}
+		return false;
+	};
+
 	var i, nodes = [];
 	for (i = 0; i < n; i++) {
 		nodes.push({name: i, links: []});
@@ -125,9 +134,12 @@ Examples.prototype.build = function(n) {
 
 	// Add 20 random edges
 	var s, t, link, links = [];
-	for (i = 0; i < 20; i++) {
+	for (i = 0; i < 10; i++) {
 		s = t = Math.floor(Math.random()*n);
-		while (t === s) {
+		while (nodes[s].links.length === n-1) {
+			s = Math.floor(Math.random()*n);
+		}
+		while (t === s || isConnectedTo(s, t)) {
 			t = Math.floor(Math.random()*n);
 		}
 		link = {id: i, source: nodes[s], target: nodes[t]};
@@ -148,8 +160,9 @@ var DFSGraphView = graphView({
 		'visitingLink': true,
 		'visitedLink': false
 	},
-	visitNode: {
+	getNextNode: {
 		nodeClass: ['tortoise', 'visited'],
+		clearLinkClass: 'visitingLink'
 	},
 	checkLink: {
 		linkClass: ['visitingLink', 'visitedLink']

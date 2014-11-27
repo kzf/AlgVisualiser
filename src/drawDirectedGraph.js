@@ -59,8 +59,9 @@ function drawDirectedGraph(container, nodes, links, widthF) {
 
 	/* Define the arrow */
 	svg.append("svg:defs").selectAll("marker")
-	    .data(["end"])      // Different link/path types can be defined here
+	    .data(["end0", "end1", "end2", "end3", "end4", "end5"])      // Different link/path types can be defined here
 	  .enter().append("svg:marker")    // This section adds in the arrows
+	    .attr("class", String)
 	    .attr("id", String)
 	    .attr("viewBox", "0 -5 10 10")
 	    .attr("refX", 20)
@@ -76,7 +77,7 @@ function drawDirectedGraph(container, nodes, links, widthF) {
 	    .data(force.links())
 	  .enter().append("svg:path")
 	    .attr("class", function(d) { return "link " + d.type; })
-	    .attr("marker-end", "url(#end)");
+	    .attr("marker-end", "url(#end0)");
 
 	/* Insert the svg for the nodes */
 	var node = svg.selectAll(".node")
