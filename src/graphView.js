@@ -54,15 +54,23 @@ var graphView = function(params) {
 	};
 
 	_GraphView.prototype.doStep = function(i) {
-		var c;
+		var c, k;
 		for (c in this.nodeLists) {
 			if (this.nodeLists.hasOwnProperty(c)) {
 				if (typeof this.nodeLists[c][i] !== 'undefined') {
 					if (params.config[c]) {
 						this.allNodes.classed(c, false);
+						if (params.adjacencyList) {
+							for (k = 0; k < this.adjacencyListLabels.length; k++) {
+								this.adjacencyListLabels[k].removeClass(c);
+							}
+						}
 					}
 					if (this.nodeLists[c][i] !== -1) {
 						this.nodes[this.nodeLists[c][i]].classed(c, true);
+						if (params.adjacencyList) {
+							this.adjacencyListLabels[this.nodeLists[c][i]].addClass(c);
+						}
 					}
 				}
 			}
@@ -72,9 +80,17 @@ var graphView = function(params) {
 				if (typeof this.linkLists[c][i] !== 'undefined') {
 					if (params.config[c]) {
 						this.allLinks.classed(c, false);
+						if (params.adjacencyList) {
+							for (k = 0; k < this.adjacencyList.length; k++) {
+								this.adjacencyList[k].removeClass(c);
+							}
+						}
 					}
 					if (this.linkLists[c][i] !== -1) {
 						this.links[this.linkLists[c][i]].classed(c, true);
+						if (params.adjacencyList) {
+							this.adjacencyList[this.linkLists[c][i]].addClass(c);
+						}
 					}
 				}
 			}
@@ -93,10 +109,16 @@ var graphView = function(params) {
 						}
 						if (j >= 0 && this.nodeLists[c][j] !== -1) {
 							this.nodes[this.nodeLists[c][j]].classed(c, true);
+							if (params.adjacencyList) {
+								this.adjacencyListLabels[this.nodeLists[c][j]].addClass(c);
+							}
 						}
 					}
 					if (this.nodeLists[c][i] !== -1) {
 						this.nodes[this.nodeLists[c][i]].classed(c, false);
+						if (params.adjacencyList) {
+							this.adjacencyListLabels[this.nodeLists[c][i]].removeClass(c);
+						}
 					}
 				}
 			}
@@ -111,10 +133,16 @@ var graphView = function(params) {
 						}
 						if (j >= 0 && this.linkLists[c][j] !== -1) {
 							this.links[this.linkLists[c][j]].classed(c, true);
+							if (params.adjacencyList) {
+								this.adjacencyList[this.linkLists[c][j]].addClass(c);
+							}
 						}
 					}
 					if (this.linkLists[c][i] !== -1) {
 						this.links[this.linkLists[c][i]].classed(c, false);
+						if (params.adjacencyList) {
+							this.adjacencyList[this.linkLists[c][i]].removeClass(c);
+						}
 					}
 				}
 			}
@@ -149,6 +177,29 @@ var graphView = function(params) {
 		this.nodes = graph.nodes;
 		this.links = graph.links;
 		this.allLinks = graph.allLinks;
+
+		if (params.adjacencyList) {
+			this.adjacencyList = [];
+			this.adjacencyListLabels = [];
+			var nodes = this.steppedAlgorithm.alg.nodes;
+			var adj = $("<table></table>").addClass("adjacency-list");
+			var i, j, row, el, label;
+			for (i = 0; i < nodes.length; i++) {
+				label = $("<td>").text(nodes[i].name).addClass("row-label");
+				this.adjacencyListLabels[i] = label;
+				row = $("<tr>").append(label);
+				adj.append(row);
+				console.log(nodes[i]);
+				for (j = 0; j < nodes[i].links.length; j++) {
+					el = $("<td>").text(nodes[i].links[j].target.name);
+					this.adjacencyList[nodes[i].links[j].id] = el;
+					row.append(el);
+				}
+			}
+			var alContainer = $("<div>").addClass("top-right-container");
+			alContainer.append(adj);
+			$(this.container).append(alContainer);
+		}
 	};
 
 	return _GraphView;

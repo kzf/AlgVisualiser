@@ -179,13 +179,12 @@ Examples.prototype.build = function(n, E) {
 	================*/
 var DFSGraphView = graphView({
 	config: {
-		'tortoise': true,
-		'visited': false,
-		'visitingLink': true,
-		'visitedLink': false
+		'visitingNode': true,
+		'visitingLink': true
 	},
+	adjacencyList: true,
 	getNextNode: {
-		nodeClass: ['tortoise', 'visited'],
+		nodeClass: ['visitingNode', 'visitedNode'],
 		clearLinkClass: 'visitingLink'
 	},
 	checkLink: {

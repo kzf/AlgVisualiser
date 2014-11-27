@@ -1,0 +1,71 @@
+.visitedNode {
+	stroke: #cccccc;
+}
+	.visitedNode text {
+		stroke: #999999;
+	}
+
+.visitingNode {
+	fill: #BE90D4;
+	stroke: #000000;
+}
+	.visitingNode text {
+		stroke: #000000;
+	}
+
+
+marker.end1 {
+	fill: #87D37C;
+	stroke: #87D37C;
+}
+marker.end2 {
+	fill: red;
+	stroke: red;
+}
+marker.end3 {
+	fill: #cccccc;
+	stroke: #cccccc;
+}
+
+path.visitedLink {
+	stroke: #cccccc;
+	marker-end: url("#end3");
+}
+path.visitingLink {
+	stroke: red;
+	marker-end: url("#end2");
+}
+
+.top-right-container {
+	position: absolute;
+	right: 20px;
+	top: 20px;
+}
+
+.adjacency-list {
+	padding: 0;
+	border-collapse: collapse;
+}
+
+td.row-label {
+	border-right: 2px solid black;
+}
+
+td {
+	padding: 0px 3px;
+	border-bottom: 1px solid black;
+}
+
+td.visitedLink {
+	color: #cccccc;
+}
+td.visitingLink {
+	color: red;
+}
+td.visitedNode {
+	color: #cccccc;
+}
+td.visitingNode {
+	background-color: #BE90D4;
+	color: black;
+}

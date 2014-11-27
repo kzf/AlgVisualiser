@@ -12,51 +12,29 @@ path.link {
 }
 
 .hare {
-	stroke: #F9690E;
-	stroke-width: 7px;
+	stroke: #96281B;
+	fill: #F64747;
+	stroke-width: 2px;
 }
-
-.visited {
-	stroke: #cccccc;
-}
-	.visited text {
-		stroke: #999999;
+	.hare text {
+		stroke: #000000;
 	}
-
-marker.end1 {
-	fill: #87D37C;
-	stroke: #87D37C;
-}
-marker.end2 {
-	fill: red;
-	stroke: red;
-}
-marker.end3 {
-	fill: #cccccc;
-	stroke: #cccccc;
-}
 
 .tortoise {
 	fill: #87D37C;
-	stroke: #87D37C;
-	stroke: #000000;
 }
 	.tortoise text {
-		stroke: #000000;
+		stroke: #000000
 	}
+	
+.tortoise.hare {
+	stroke: #F64747;
+	stroke-width: 6px;
+}
 
 g text {
 	font-weight: 200;
 	font-family: Helvetica, sans-serif;
 	font-size: 80%;
 	stroke-width: 1px;
-}
-
-path.visitedLink {
-	stroke: #cccccc;
-	marker-end: url("#end3");
-}
-path.visitingLink {
-	stroke: red;
-	marker-end: url("#end2");
 }

@@ -1,4 +1,5 @@
 @import 'haretortoise';
+@import 'graphalgs';
 @import 'textview';
 
 $accent: #D35400;
@@ -94,6 +95,7 @@ footer {
 }
 
 .left-view {
+	position: relative;
 	display: inline-block;
 	width: 70%;
 	vertical-align: top;
